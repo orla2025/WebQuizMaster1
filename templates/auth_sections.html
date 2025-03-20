@@ -1,0 +1,67 @@
+<!-- Login Section -->
+<div id="login-section" class="auth-section hidden">
+    <div class="container">
+        <div class="card auth-card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">{{ _('Login') }}</h2>
+                <button type="button" class="btn-close" onclick="hideSection('login-section')" aria-label="Close"></button>
+            </div>
+            <form id="login-form">
+                <div class="mb-3">
+                    <input type="email" class="form-control" id="login-email" placeholder="{{ _('Email') }}" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" class="form-control" id="login-password" placeholder="{{ _('Password') }}" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">{{ _('Login') }}</button>
+            </form>
+            <p class="text-center mt-3">
+                {{ _("Don't have an account?") }} <a href="#" onclick="showSection('register-section')">{{ _('Register') }}</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Register Section -->
+<div id="register-section" class="auth-section hidden">
+    <div class="container">
+        <div class="card auth-card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">{{ _('Register as Player') }}</h2>
+                <button type="button" class="btn-close" onclick="hideSection('register-section')" aria-label="Close"></button>
+            </div>
+            <form id="register-form" onsubmit="return false;">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="register-firstname" class="form-label text-white">{{ _('First Name') }}*</label>
+                        <input type="text" class="form-control" id="register-firstname" name="first_name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="register-lastname" class="form-label text-white">{{ _('Last Name') }}*</label>
+                        <input type="text" class="form-control" id="register-lastname" name="last_name" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="register-dob" class="form-label text-white">{{ _('Date of Birth') }}*</label>
+                    <input type="date" class="form-control" id="register-dob" name="date_of_birth" required>
+                </div>
+                <div class="mb-3">
+                    <label for="register-email" class="form-label text-white">{{ _('Email') }}*</label>
+                    <input type="email" class="form-control" id="register-email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="register-password" class="form-label text-white">{{ _('Password') }}*</label>
+                    <input type="password" class="form-control" id="register-password" name="password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="register-team" class="form-label text-white">{{ _('Team') }}</label>
+                    <input type="text" class="form-control" id="register-team" name="team" placeholder="{{ _('Optional') }}">
+                </div>
+                <button type="submit" class="btn btn-primary w-100" onclick="registerUser(event)">{{ _('Register') }}</button>
+            </form>
+            <p class="text-center mt-3">
+                {{ _('Already have an account?') }} <a href="#" onclick="showSection('login-section')">{{ _('Login') }}</a>
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _('ScoutHub - Football Talent Discovery') }}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Include Navigation -->
+    {% include 'navbar.html' %}
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">{{ _('Discover Football Talents') }}</h1>
+            <p class="lead mb-4">{{ _('Find and track promising young players all in one place') }}</p>
+            <div class="d-flex justify-content-center gap-3">
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('scouting') }}" class="btn btn-primary btn-lg">{{ _('Start Scouting') }}</a>
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-success btn-lg">{{ _('My Players') }}</a>
+                {% else %}
+                    <button class="btn btn-success btn-lg" onclick="showSection('register-section')">{{ _('Sign Up Now') }}</button>
+                    <button class="btn btn-primary btn-lg" onclick="showSection('login-section')">{{ _('Login') }}</button>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">{{_('Features')}}</h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="feature-card">
+                        <i class="fas fa-video"></i>
+                        <h3>{{_('Video Analysis')}}</h3>
+                        <p>{{_('Upload and analyze performances')}}</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>{{_('Statistics')}}</h3>
+                        <p>{{_('Track detailed player statistics')}}</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-card">
+                        <i class="fas fa-users"></i>
+                        <h3>{{_('Network')}}</h3>
+                        <p>{{_('Connect with other scouts')}}</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-card">
+                        <i class="fas fa-star"></i>
+                        <h3>{{_('Talent Pool')}}</h3>
+                        <p>{{_('Access growing talent database')}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Sections -->
+    {% include 'auth_sections.html' %}
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ player.name }} - Player Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container py-5">
+        <!-- Player Info Section -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="card-title text-white">{{ player.name }}</h2>
+                    <a href="{{ url_for('scouting') }}" class="btn btn-outline-primary">Back to Players List</a>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-white"><strong>Team:</strong> {{ player.team }}</p>
+                        <p class="text-white"><strong>Role:</strong> {{ player.role }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="text-white"><strong>Goals:</strong> {{ player.goals }}</p>
+                        <p class="text-white"><strong>Assists:</strong> {{ player.assists }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Upload Section - Only visible to profile owner -->
+        {% if current_user.id == player.user_id %}
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3 class="text-white">Upload Video</h3>
+                <form id="video-upload-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="video-title" class="form-label text-white">Title*</label>
+                        <input type="text" class="form-control" id="video-title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-white">Tags</label>
+                        <input type="text" class="form-control" id="video-tags" 
+                               placeholder="Add tags (comma separated, e.g.: powerful shot, left foot, counter-attack)">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-white">Notes</label>
+                        <textarea class="form-control" id="video-notes" rows="3" 
+                                  placeholder="Add any additional notes about this highlight"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-white">Video Source*</label>
+                        <div class="btn-group w-100 mb-2" role="group">
+                            <input type="radio" class="btn-check" name="video-source" id="source-file" value="file" checked>
+                            <label class="btn btn-outline-primary" for="source-file">Upload File</label>
+                            <input type="radio" class="btn-check" name="video-source" id="source-url" value="url">
+                            <label class="btn btn-outline-primary" for="source-url">Video URL</label>
+                        </div>
+                    </div>
+                    <div id="file-upload-section" class="mb-3">
+                        <label for="video-file" class="form-label text-white">Video File</label>
+                        <input type="file" class="form-control" id="video-file" accept="video/*">
+                    </div>
+                    <div id="url-upload-section" class="mb-3 d-none">
+                        <label for="video-url" class="form-label text-white">YouTube URL</label>
+                        <input type="url" class="form-control" id="video-url" placeholder="Enter YouTube video URL">
+                        <small class="form-text text-muted">Paste a YouTube video URL (e.g., https://www.youtube.com/watch?v=xxxxx)</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Video</button>
+                </form>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Videos List Section -->
+        <div class="card">
+            <div class="card-body">
+                <h3 class="text-white">Videos</h3>
+                <div id="videos-list" class="row g-4">
+                    {% if player.videos %}
+                        {% for video in player.videos %}
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                {% if video.video_type == 'youtube' %}
+                                    <div class="ratio ratio-16x9">
+                                        <img src="https://img.youtube.com/vi/{{ video.youtube_id }}/maxresdefault.jpg" 
+                                             class="card-img-top" 
+                                             alt="{{ video.title }}"
+                                             onclick="window.open('{{ video.video_url }}', '_blank')"
+                                             style="cursor: pointer;">
+                                    </div>
+                                {% else %}
+                                    <video class="card-img-top" controls>
+                                        <source src="{{ url_for('video.get_video', player_id=player.id, video_id=video.id) }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title text-white">{{ video.title }}</h5>
+                                    <div class="video-metadata">
+                                        {% if video.tags %}
+                                        {% for tag in video.tags %}
+                                        <span class="metadata-item tag">{{ tag }}</span>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    {% if video.notes %}
+                                    <p class="video-notes">{{ video.notes }}</p>
+                                    {% endif %}
+                                    <small class="upload-date">{{ video.upload_date.strftime('%Y-%m-%d') }}</small>
+                                    {% if video.video_type == 'youtube' %}
+                                    <small class="youtube-note">Click thumbnail to watch on YouTube</small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="col-12">
+                            <p class="text-white">No videos uploaded yet.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='video_management.js') }}"></script>
+</body>
+</html>

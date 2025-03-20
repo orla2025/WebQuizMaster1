@@ -1,0 +1,572 @@
+/* Base styles */
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    color: #fff;
+    background-color: #111;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* Auth sections */
+.auth-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: flex-start; /* Changed from center to allow scrolling */
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.auth-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    margin: 2rem auto;
+    position: relative;
+}
+
+/* Form elements */
+.form-control, .form-select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    height: auto;
+    font-size: 0.95rem;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.form-select option {
+    background: #343a40;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.form-control:focus, .form-select:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #0d6efd;
+    color: white;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Buttons */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: #0d6efd;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0b5ed7;
+    transform: translateY(-2px);
+}
+
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+/* Form layout fixes */
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem !important;
+}
+
+/* Make sure the submit button is always visible */
+form button[type="submit"] {
+    margin-top: 1.5rem;
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Close button */
+.btn-close {
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    opacity: .7;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* Hide elements */
+.hidden {
+    display: none !important;
+}
+
+/* Add clear spacing after the form */
+#add-player-form {
+    margin-bottom: 2rem;
+}
+
+/* Hero section */
+.hero-section {
+    min-height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Feature cards */
+.feature-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-card i {
+    font-size: 2.5rem;
+    color: #0d6efd;
+    margin-bottom: 1rem;
+}
+
+/* Variables */
+:root {
+    --primary-gradient: linear-gradient(45deg, #2193b0, #6dd5ed);
+    --dark-overlay: rgba(0, 0, 0, 0.7);
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Text Styles */
+.text-gradient {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: var(--primary-gradient);
+    border-radius: 2px;
+}
+
+/* Buttons */
+.pulse-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.pulse-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.pulse-button:hover::after {
+    width: 200%;
+    height: 200%;
+}
+
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+/* Player Cards */
+.player-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.player-card .card-body {
+    color: #fff;
+}
+
+.player-card .card-title {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.player-card .card-text {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.player-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--bs-primary);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Stats Badge */
+.stat-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    margin: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.stat-badge:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Footer */
+.footer {
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.footer-link:hover {
+    color: var(--bs-primary);
+    transform: translateX(5px);
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-link {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    color: var(--bs-primary);
+    transform: translateY(-3px);
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Card Styles */
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Navigation */
+.navbar {
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.navbar.scrolled {
+    background-color: var(--bs-dark) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        padding-top: 80px;
+    }
+
+    .feature-card {
+        margin-bottom: 1rem;
+    }
+
+    .auth-section {
+        padding: 1rem;
+    }
+
+    .auth-card {
+        margin: 0;
+    }
+}
+
+/* Modal section styles */
+.modal-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal-section .card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+
+.modal-section .card-body {
+    padding: 1.5rem;
+}
+
+/* Form styles */
+.form-label {
+    color: #fff;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+
+/* Submit button */
+.btn-primary {
+    background: #0d6efd;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #0b5ed7;
+    transform: translateY(-2px);
+}
+
+/* Close button */
+.btn-close {
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+    opacity: .7;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* Margin utilities */
+.mb-2 {
+    margin-bottom: 0.5rem !important;
+}
+
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+/* Player Profile Styles */
+.player-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.player-card .card-body {
+    color: #fff;
+}
+
+.player-card .card-title {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.player-card .card-text {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.stat-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    margin: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.stat-badge:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Form and Input Styles */
+.form-control, .form-select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.5rem 0.75rem;
+}
+
+.form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+}
+
+.form-select option {
+    background: #343a40;
+    color: white;
+}
+
+.form-label {
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+/* Video Section Styles */
+.video-section {
+    margin-top: 2rem;
+}
+
+.video-section .card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.video-section .card-title {
+    color: #fff;
+}
+
+.video-section .card-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+.video-section .card-text strong {
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.video-section small.text-light {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.video-upload-form {
+    padding: 1rem;
+}
+
+.text-muted {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Video metadata styling */
+.video-metadata {
+    margin: 8px 0;
+    font-size: 0.85rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.metadata-item {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Action type styling */
+.metadata-item.action-type {
+    background: rgba(13, 110, 253, 0.2);  /* Bootstrap primary color with transparency */
+    border: 1px solid rgba(13, 110, 253, 0.3);
+}
+
+/* Tags styling */
+.metadata-item.tag {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.video-notes {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 8px 0;
+}
+
+.upload-date, .youtube-note {
+    display: block;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 8px;
+}
